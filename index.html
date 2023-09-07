@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            text-align: center;
+        }
+
+        #course {
+            width: 400px;
+            height: 200px;
+            background-color: #66BB6A;
+            position: relative;
+            margin: 20px auto;
+        }
+
+        #hole {
+            width: 20px;
+            height: 20px;
+            background-color: #222;
+            border-radius: 50%;
+            position: absolute;
+            top: 90px;
+            left: 370px;
+        }
+
+        #ball {
+            width: 20px;
+            height: 20px;
+            background-color: #FFD700;
+            border-radius: 50%;
+            position: absolute;
+            top: 90px;
+            left: 10px;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 18px;
+        }
+    </style>
+    <title> My First Golf Game Project </title>
+</head>
+<body>
+    <h1>Golf Game</h1>
+    <div id="course">
+        <div id="hole"></div>
+        <div id="ball"></div>
+    </div>
+    <p id="result"></p>
+    <button id="shoot">Shoot</button>
+
+    <script>
+        // Variables
+        let ballPosition = 10;
+        let holePosition = 370;
+        let strokes = 0;
+
+        // Function to update the ball's position
+        function updateBallPosition() {
+            document.getElementById("ball").style.left = ballPosition + "px";
+        }
+
+        // Function to check if the ball is in the hole
+        function checkHole() {
+            if (Math.abs(ballPosition - holePosition) < 10) {
+                document.getElementById("result").textContent = `Hole in one! It took you ${strokes} strokes.`;
+                document.getElementById("shoot").disabled = true;
+            }
+        }
+
+        // Function to handle shooting the ball
+        function shootBall() {
+            strokes++;
+            ballPosition += Math.floor(Math.random() * 20) + 1; // Randomly move the ball
+            updateBallPosition();
+            checkHole();
+        }
+
+        // Event listener for the shoot button
+        document.getElementById("shoot").addEventListener("click", shootBall);
+    </script>
+</body>
+</html>
